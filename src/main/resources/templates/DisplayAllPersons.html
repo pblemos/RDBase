@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Displaying All Users...</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"> </script>
+</head>
+<body class="container">
+<!-- List of Persons -->
+<br/><br/>
+<h1>List of Persons</h1>
+<br/>
+<div class="with:80%">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone No.</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="person-buttons">
+        <tr th:each="person : ${persons}">
+            <th scope="row" th:text="${person.id}">1</th>
+            <td th:text="${person.name}">Example Name</td>
+            <td th:text="${person.email}">Example Email</td>
+            <td th:text="${person.phone}">Phone</td>
+            <td><button type="button" class="btn btn-primary shadow mb-5 rounded"
+                        th:href="@{/info(id=${person.id})}">Show Info 📝</button></td>
+            <td><button type="button" class="btn btn-warning shadow mb-5 rounded"
+                        th:href="@{/edit(id=${person.id})}">Edit &nbsp;🔨</button></td>
+            <td><button type="button" class="btn btn-danger shadow mb-5 rounded"
+                        th:href="@{/delete(id=${person.id})}">Delete &nbsp;🗑️</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Button (Add Person) -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Create New Person</button>
+<!-- Modal for Adding New Person -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <h2>Add Person</h2>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Name</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="John Smith">
+                </div>
+                <h6>Contacts</h6>
+                <div class="form-row">
+                    <div class="col-7">
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Phone">
+                    </div>
+                </div> <br> <hr>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Address</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Street, Door Number, Code">
+                </div>
+                <h6>Date of Birth:</h6>
+                <div class="datePicker">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="dd">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="mm">
+                            </div>
+                            <div class="col" id="picker-year">
+                                <input type="text" class="form-control" placeholder="yy">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="save-button-cl">
+                    <br> <button type="submit"
+                                 class="btn btn-primary" id="savenewperson">Create New Person
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
